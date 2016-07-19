@@ -668,7 +668,7 @@
         <!--Tab View Controller-->
         <scene sceneID="2bo-ZV-gZC">
             <objects>
-                <tabViewController selectedTabViewItemIndex="1" id="1hb-3t-Bpi" sceneMemberID="viewController">
+                <tabViewController selectedTabViewItemIndex="0" id="1hb-3t-Bpi" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem identifier="" id="w7U-Mo-NL8"/>
                         <tabViewItem label="Edit" identifier="" id="6P9-Ap-Hj0"/>
@@ -703,10 +703,10 @@
             </objects>
             <point key="canvasLocation" x="-453" y="1180"/>
         </scene>
-        <!--View 2-->
+        <!--Edit-->
         <scene sceneID="4x7-gL-trE">
             <objects>
-                <viewController title="View 2" id="XAo-cz-6ix" sceneMemberID="viewController">
+                <viewController title="Edit" id="XAo-cz-6ix" customClass="EditViewController" customModule="PhotoUtility" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="8lP-3P-yNN">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -719,7 +719,7 @@
         <!--Export-->
         <scene sceneID="D9M-Xa-vLh">
             <objects>
-                <viewController title="Export" id="8K9-AC-fyu" sceneMemberID="viewController">
+                <viewController title="Export" id="8K9-AC-fyu" customClass="ExportViewController" customModule="PhotoUtility" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="XHW-Ku-S70">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
