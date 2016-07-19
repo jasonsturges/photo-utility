@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6198" systemVersion="14A297b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6198"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -641,12 +642,12 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="PhotoUtility" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
-        <!--Window Controller - Window-->
+        <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
@@ -657,25 +658,76 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                     </window>
                     <connections>
-                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
+                        <segue destination="1hb-3t-Bpi" kind="relationship" relationship="window.shadowedContentViewController" id="Y1x-oB-cjl"/>
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="hIz-AP-VOD">
+        <!--Tab View Controller-->
+        <scene sceneID="2bo-ZV-gZC">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <tabViewController selectedTabViewItemIndex="1" id="1hb-3t-Bpi" sceneMemberID="viewController">
+                    <tabViewItems>
+                        <tabViewItem identifier="" id="w7U-Mo-NL8"/>
+                        <tabViewItem label="Edit" identifier="" id="6P9-Ap-Hj0"/>
+                        <tabViewItem id="jTl-wP-e0S"/>
+                    </tabViewItems>
+                    <tabView key="tabView" type="noTabsBezelBorder" id="KiM-4U-hGs">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <font key="font" metaFont="system"/>
+                        <tabViewItems/>
+                    </tabView>
+                    <connections>
+                        <segue destination="sRf-z0-ZZU" kind="relationship" relationship="tabItems" id="YrW-Jl-CZw"/>
+                        <segue destination="XAo-cz-6ix" kind="relationship" relationship="tabItems" id="nZp-up-Z8G"/>
+                        <segue destination="8K9-AC-fyu" kind="relationship" relationship="tabItems" id="U13-7h-s0p"/>
+                    </connections>
+                </tabViewController>
+                <customObject id="JzZ-w4-hdf" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="708"/>
+        </scene>
+        <!--Import-->
+        <scene sceneID="DJ8-ha-E3Y">
+            <objects>
+                <viewController title="Import" id="sRf-z0-ZZU" customClass="ImportViewController" customModule="PhotoUtility" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="fu9-DD-5Jq">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </view>
                 </viewController>
-                <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="FVT-ST-GWQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="-453" y="1180"/>
+        </scene>
+        <!--View 2-->
+        <scene sceneID="4x7-gL-trE">
+            <objects>
+                <viewController title="View 2" id="XAo-cz-6ix" sceneMemberID="viewController">
+                    <view key="view" id="8lP-3P-yNN">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="zX8-KH-0M3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="74" y="1180"/>
+        </scene>
+        <!--Export-->
+        <scene sceneID="D9M-Xa-vLh">
+            <objects>
+                <viewController title="Export" id="8K9-AC-fyu" sceneMemberID="viewController">
+                    <view key="view" id="XHW-Ku-S70">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="zoQ-Qn-JNi" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="615" y="1180"/>
         </scene>
     </scenes>
 </document>
