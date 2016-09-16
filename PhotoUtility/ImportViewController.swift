@@ -70,7 +70,6 @@ class ImportViewController: NSViewController {
     
     
     @IBAction func `import`(sender: AnyObject) {
-        do {
             let fs = NSFileManager.defaultManager()
             let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
             
@@ -96,9 +95,6 @@ class ImportViewController: NSViewController {
                     }
                 }
             }
-        } catch let error {
-            print (error)
-        }
     }
     
     
