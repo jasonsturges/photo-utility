@@ -70,31 +70,30 @@ class ImportViewController: NSViewController {
     
     
     @IBAction func `import`(_ sender: AnyObject) {
-            let fs = FileManager.default
-            let queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default)
-            
-            queue.async {
-                for file:URL in self.inputFolderPath {
-                    var isDir:ObjCBool = false
-                    if fs.fileExists(atPath: file.path, isDirectory:&isDir) {
-                        if isDir.boolValue {
-                            // file exists and is a directory
-                        } else {
-                            // file exists and is not a directory
-                            if (ImageUtility.isImageFile(file)) {
-                                if (ImageUtility.isCameraRawFile(file)) {
-                                    FileUtility.copy(file, pathUrl: self.outputRawFolderPath, offset: self.offsetTextField.intValue)
-                                } else {
-                                    FileUtility.copy(file, pathUrl: self.outputJpegFolderPath, offset: self.offsetTextField.intValue)
-                                }
-                            }
-
-                        }
+        let fs = FileManager.default
+        
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
+            for file:URL in self.inputFolderPath {
+                var isDir:ObjCBool = false
+                if fs.fileExists(atPath: file.path, isDirectory:&isDir) {
+                    if isDir.boolValue {
+                        // file exists and is a directory
                     } else {
-                        // file does not exist
+                        // file exists and is not a directory
+                        if (ImageUtility.isImageFile(file)) {
+                            if (ImageUtility.isCameraRawFile(file)) {
+                                FileUtility.copy(file, pathUrl: self.outputRawFolderPath, offset: self.offsetTextField.intValue)
+                            } else {
+                                FileUtility.copy(file, pathUrl: self.outputJpegFolderPath, offset: self.offsetTextField.intValue)
+                            }
+                        }
+                        
                     }
+                } else {
+                    // file does not exist
                 }
             }
+        }
     }
     
     
