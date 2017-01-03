@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		813D3D301E1C678C003A9F5B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 813D3D2F1E1C678C003A9F5B /* .gitignore */; };
 		818881151D3EA79700DC6CB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818881141D3EA79700DC6CB7 /* AppDelegate.swift */; };
 		818881171D3EA79700DC6CB7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818881161D3EA79700DC6CB7 /* ViewController.swift */; };
 		818881191D3EA79700DC6CB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 818881181D3EA79700DC6CB7 /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		813D3D2F1E1C678C003A9F5B /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		818881111D3EA79700DC6CB7 /* PhotoUtility.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoUtility.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		818881141D3EA79700DC6CB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		818881161D3EA79700DC6CB7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -46,6 +48,7 @@
 		818881081D3EA79700DC6CB7 = {
 			isa = PBXGroup;
 			children = (
+				813D3D2F1E1C678C003A9F5B /* .gitignore */,
 				818881131D3EA79700DC6CB7 /* PhotoUtility */,
 				818881121D3EA79700DC6CB7 /* Products */,
 			);
@@ -136,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				818881191D3EA79700DC6CB7 /* Assets.xcassets in Resources */,
+				813D3D301E1C678C003A9F5B /* .gitignore in Resources */,
 				8188811C1D3EA79700DC6CB7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
