@@ -10,8 +10,8 @@ import Cocoa
 
 class ImageUtility: NSObject {
     
-    static func isImageFile(file:NSURL) -> Bool {
-        switch file.pathExtension!.lowercaseString {
+    static func isImageFile(_ file:URL) -> Bool {
+        switch file.pathExtension.lowercased() {
         case "jpg",
              "jpeg",
              "png",
@@ -26,8 +26,8 @@ class ImageUtility: NSObject {
         }
     }
     
-    static func isCameraRawFile(file:NSURL) -> Bool {
-        switch file.pathExtension!.lowercaseString {
+    static func isCameraRawFile(_ file:URL) -> Bool {
+        switch file.pathExtension.lowercased() {
         case "cr",
              "cr2":
             return true

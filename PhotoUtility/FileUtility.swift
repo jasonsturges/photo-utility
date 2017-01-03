@@ -10,7 +10,7 @@ import Cocoa
 
 class FileUtility: NSObject {
     
-    static func browseFiles() -> [NSURL] {
+    static func browseFiles() -> [URL] {
         
         let dialog = NSOpenPanel()
         
@@ -26,11 +26,11 @@ class FileUtility: NSObject {
             return []
         }
         
-        return dialog.URLs
+        return dialog.urls
     }
     
     
-    static func browseFolder() -> NSURL! {
+    static func browseFolder() -> URL! {
         
         let dialog = NSOpenPanel()
         
@@ -46,38 +46,38 @@ class FileUtility: NSObject {
             return nil
         }
         
-        return dialog.URL
+        return dialog.url
     }
     
     
-    static func copy(file:NSURL, pathUrl:NSURL, offset:Int32 = 0) {
-        let fs:NSFileManager = NSFileManager.defaultManager()
+    static func copy(_ file:URL, pathUrl:URL, offset:Int32 = 0) {
+        let fs:FileManager = FileManager.default
         
         do {
-            var dest:NSURL
+            var dest:URL
             
             if (offset != 0) {
-                let filename = file.URLByDeletingPathExtension?.lastPathComponent
+                let filename = file.deletingPathExtension().lastPathComponent
                 let fileExtension = file.pathExtension
                 
-                if ((filename?.lowercaseString.hasPrefix("dscf") == true) ||
-                    (filename?.lowercaseString.hasPrefix("img_") == true)) {
+                if ((filename.lowercased().hasPrefix("dscf") == true) ||
+                    (filename.lowercased().hasPrefix("img_") == true)) {
                     
-                    let prefix = filename!.startIndex ..< filename!.startIndex.advancedBy(4)
-                    let count = filename!.startIndex.advancedBy(4) ..< filename!.endIndex
-                    var n = Int32(filename![count])!
+                    let prefix = filename.startIndex ..< filename.characters.index(filename.startIndex, offsetBy: 4)
+                    let count = filename.characters.index(filename.startIndex, offsetBy: 4) ..< filename.endIndex
+                    var n = Int32(filename[count])!
                     n += offset;
                     
-                    dest = NSURL(fileURLWithPath: "\(filename![prefix])\(String(format: "%04d", n)).\(fileExtension!)", relativeToURL: pathUrl)
+                    dest = URL(fileURLWithPath: "\(filename[prefix])\(String(format: "%04d", n)).\(fileExtension)", relativeTo: pathUrl)
 
                 } else {
-                    dest = NSURL(fileURLWithPath: file.lastPathComponent!, relativeToURL: pathUrl)
+                    dest = URL(fileURLWithPath: file.lastPathComponent, relativeTo: pathUrl)
                 }
             } else {
-                dest = NSURL(fileURLWithPath: file.lastPathComponent!, relativeToURL: pathUrl)
+                dest = URL(fileURLWithPath: file.lastPathComponent, relativeTo: pathUrl)
             }
             
-            try fs.copyItemAtURL(file, toURL: dest)
+            try fs.copyItem(at: file, to: dest)
             
         } catch let error  {
             print (error)

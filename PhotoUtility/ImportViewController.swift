@@ -12,9 +12,9 @@ class ImportViewController: NSViewController {
     
     // MARK: Properties
     
-    var inputFolderPath:[NSURL]!
-    var outputJpegFolderPath:NSURL!
-    var outputRawFolderPath:NSURL!
+    var inputFolderPath:[URL]!
+    var outputJpegFolderPath:URL!
+    var outputRawFolderPath:URL!
     
     
     // MARK: Outlets
@@ -38,12 +38,12 @@ class ImportViewController: NSViewController {
     
     // MARK: Actions
     
-    @IBAction func inputFolderBrowse(sender: AnyObject) {
-        inputFolderPath = FileUtility.browseFiles()
+    @IBAction func inputFolderBrowse(_ sender: AnyObject) {
+        inputFolderPath = FileUtility.browseFiles() as [URL]!
         
         if (inputFolderPath != nil) {
             if (inputFolderPath.count == 1) {
-                inputFolderTextField.stringValue = inputFolderPath.first!.path!
+                inputFolderTextField.stringValue = inputFolderPath.first!.path
             } else if (inputFolderPath.count > 0) {
                 inputFolderTextField.stringValue = "\(inputFolderPath.count) files"
             }
@@ -51,33 +51,33 @@ class ImportViewController: NSViewController {
     }
     
     
-    @IBAction func outputJpegFolderBrowse(sender: AnyObject) {
-        outputJpegFolderPath = FileUtility.browseFolder()
+    @IBAction func outputJpegFolderBrowse(_ sender: AnyObject) {
+        outputJpegFolderPath = FileUtility.browseFolder() as URL!
         
         if (outputJpegFolderPath != nil) {
-            outputJpegFolderTextField.stringValue = outputJpegFolderPath!.path!
+            outputJpegFolderTextField.stringValue = outputJpegFolderPath!.path
         }
     }
     
     
-    @IBAction func outputRawFolderBrowse(sender: AnyObject) {
-        outputRawFolderPath = FileUtility.browseFolder()
+    @IBAction func outputRawFolderBrowse(_ sender: AnyObject) {
+        outputRawFolderPath = FileUtility.browseFolder() as URL!
         
         if (outputRawFolderPath != nil) {
-            outputRawFolderTextField.stringValue = outputRawFolderPath!.path!
+            outputRawFolderTextField.stringValue = outputRawFolderPath!.path
         }
     }
     
     
-    @IBAction func `import`(sender: AnyObject) {
-            let fs = NSFileManager.defaultManager()
-            let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+    @IBAction func `import`(_ sender: AnyObject) {
+            let fs = FileManager.default
+            let queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default)
             
-            dispatch_async(queue) {
-                for file:NSURL in self.inputFolderPath {
+            queue.async {
+                for file:URL in self.inputFolderPath {
                     var isDir:ObjCBool = false
-                    if fs.fileExistsAtPath(file.path!, isDirectory:&isDir) {
-                        if isDir {
+                    if fs.fileExists(atPath: file.path, isDirectory:&isDir) {
+                        if isDir.boolValue {
                             // file exists and is a directory
                         } else {
                             // file exists and is not a directory
