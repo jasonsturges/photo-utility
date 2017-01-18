@@ -10,46 +10,6 @@ import Cocoa
 
 class FileUtility: NSObject {
     
-    static func browseFiles() -> [URL] {
-        
-        let dialog = NSOpenPanel()
-        
-        dialog.title = "Choose files"
-        dialog.showsResizeIndicator = true
-        dialog.showsHiddenFiles = false
-        dialog.canChooseFiles = true
-        dialog.canChooseDirectories = false
-        dialog.canCreateDirectories = true
-        dialog.allowsMultipleSelection = true
-        
-        if (dialog.runModal() != NSModalResponseOK) {
-            return []
-        }
-        
-        return dialog.urls
-    }
-    
-    
-    static func browseFolder() -> URL! {
-        
-        let dialog = NSOpenPanel()
-        
-        dialog.title = "Choose folder"
-        dialog.showsResizeIndicator = true
-        dialog.showsHiddenFiles = false
-        dialog.canChooseFiles = false
-        dialog.canChooseDirectories = true
-        dialog.canCreateDirectories = true
-        dialog.allowsMultipleSelection = false
-        
-        if (dialog.runModal() != NSModalResponseOK) {
-            return nil
-        }
-        
-        return dialog.url
-    }
-    
-    
     static func copy(_ file:URL, pathUrl:URL, offset:Int32 = 0) {
         let fs:FileManager = FileManager.default
         

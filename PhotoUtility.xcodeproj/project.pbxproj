@@ -30,8 +30,8 @@
 		818881231D3EACAA00DC6CB7 /* ImportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportViewController.swift; sourceTree = "<group>"; };
 		818881251D3EACE800DC6CB7 /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		818881291D3EAD1500DC6CB7 /* ExportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportViewController.swift; sourceTree = "<group>"; };
-		8188812C1D3ECFB600DC6CB7 /* FileUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtility.swift; sourceTree = "<group>"; };
-		81AE4DA91D3FF98500204D2C /* ImageUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUtility.swift; sourceTree = "<group>"; };
+		8188812C1D3ECFB600DC6CB7 /* FileUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileUtility.swift; path = PhotoUtility/FileUtility.swift; sourceTree = "<group>"; };
+		81AE4DA91D3FF98500204D2C /* ImageUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageUtility.swift; path = PhotoUtility/ImageUtility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,16 +67,33 @@
 			children = (
 				8188811D1D3EA79700DC6CB7 /* Info.plist */,
 				818881141D3EA79700DC6CB7 /* AppDelegate.swift */,
-				818881161D3EA79700DC6CB7 /* ViewController.swift */,
+				81FAC0141E2FDC6700E85995 /* Controller */,
+				81FAC0131E2FDC5700E85995 /* Helper */,
 				818881181D3EA79700DC6CB7 /* Assets.xcassets */,
 				8188811A1D3EA79700DC6CB7 /* Main.storyboard */,
-				818881231D3EACAA00DC6CB7 /* ImportViewController.swift */,
-				818881251D3EACE800DC6CB7 /* EditViewController.swift */,
-				818881291D3EAD1500DC6CB7 /* ExportViewController.swift */,
+			);
+			path = PhotoUtility;
+			sourceTree = "<group>";
+		};
+		81FAC0131E2FDC5700E85995 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
 				8188812C1D3ECFB600DC6CB7 /* FileUtility.swift */,
 				81AE4DA91D3FF98500204D2C /* ImageUtility.swift */,
 			);
-			path = PhotoUtility;
+			name = Helper;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		81FAC0141E2FDC6700E85995 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				818881161D3EA79700DC6CB7 /* ViewController.swift */,
+				818881231D3EACAA00DC6CB7 /* ImportViewController.swift */,
+				818881251D3EACE800DC6CB7 /* EditViewController.swift */,
+				818881291D3EAD1500DC6CB7 /* ExportViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

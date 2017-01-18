@@ -12,9 +12,10 @@ class ImportViewController: NSViewController {
     
     // MARK: Properties
     
-    var inputFolderPath:[URL]!
-    var outputJpegFolderPath:URL!
-    var outputRawFolderPath:URL!
+    var inputFiles: [URL]!
+    var outputJpegFolder: URL!
+    var outputRawFolder: URL!
+    var offset: Int32 = 0
     
     
     // MARK: Outlets
@@ -34,46 +35,75 @@ class ImportViewController: NSViewController {
     @IBOutlet weak var offsetTextField: NSTextField!
     
     @IBOutlet weak var importButton: NSButton!
+
+    @IBOutlet weak var progressIndicator: NSProgressIndicator!
     
     
     // MARK: Actions
     
     @IBAction func inputFolderBrowse(_ sender: AnyObject) {
-        inputFolderPath = FileUtility.browseFiles() as [URL]!
+        let openPanel = NSOpenPanel()
+        openPanel.canChooseDirectories    = false
+        openPanel.canChooseFiles          = true
+        openPanel.showsHiddenFiles        = false
+        openPanel.allowsMultipleSelection = true
         
-        if (inputFolderPath != nil) {
-            if (inputFolderPath.count == 1) {
-                inputFolderTextField.stringValue = inputFolderPath.first!.path
-            } else if (inputFolderPath.count > 0) {
-                inputFolderTextField.stringValue = "\(inputFolderPath.count) files"
-            }
+        openPanel.beginSheetModal(for: self.view.window!) { (response) -> Void in
+            guard response == NSFileHandlingPanelOKButton else {return}
+            self.inputFiles = openPanel.urls
+            
+            self.inputFolderTextField.stringValue = "\(self.inputFiles.count) files"
+            
+            self.progressIndicator.minValue = 0
+            self.progressIndicator.maxValue = Double(self.inputFiles.count)
+            self.progressIndicator.doubleValue = 0.0
         }
     }
     
     
     @IBAction func outputJpegFolderBrowse(_ sender: AnyObject) {
-        outputJpegFolderPath = FileUtility.browseFolder() as URL!
+        let openPanel = NSOpenPanel()
+        openPanel.canChooseDirectories  = true
+        openPanel.canChooseFiles        = false
+        openPanel.canCreateDirectories  = true
+        openPanel.showsHiddenFiles      = false
         
-        if (outputJpegFolderPath != nil) {
-            outputJpegFolderTextField.stringValue = outputJpegFolderPath!.path
+        openPanel.beginSheetModal(for: self.view.window!) { (response) -> Void in
+            guard response == NSFileHandlingPanelOKButton else {return}
+            if let URL = openPanel.url {
+                self.outputJpegFolder = URL
+                self.outputJpegFolderTextField.stringValue = URL.path
+            }
         }
     }
     
     
     @IBAction func outputRawFolderBrowse(_ sender: AnyObject) {
-        outputRawFolderPath = FileUtility.browseFolder() as URL!
+        let openPanel = NSOpenPanel()
+        openPanel.canChooseDirectories  = true
+        openPanel.canChooseFiles        = false
+        openPanel.canCreateDirectories  = true
+        openPanel.showsHiddenFiles      = false
         
-        if (outputRawFolderPath != nil) {
-            outputRawFolderTextField.stringValue = outputRawFolderPath!.path
+        openPanel.beginSheetModal(for: self.view.window!) { (response) -> Void in
+            guard response == NSFileHandlingPanelOKButton else {return}
+            if let URL = openPanel.url {
+                self.outputRawFolder = URL
+                self.outputRawFolderTextField.stringValue = URL.path
+            }
         }
     }
     
     
     @IBAction func `import`(_ sender: AnyObject) {
         let fs = FileManager.default
+        outputJpegFolder = URL(fileURLWithPath: outputJpegFolderTextField.stringValue)
+        outputRawFolder = URL(fileURLWithPath: outputRawFolderTextField.stringValue)
+        offset = offsetTextField.intValue
+        importButton.isEnabled = false
         
         DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
-            for file:URL in self.inputFolderPath {
+            for file:URL in self.inputFiles {
                 var isDir:ObjCBool = false
                 if fs.fileExists(atPath: file.path, isDirectory:&isDir) {
                     if isDir.boolValue {
@@ -82,16 +112,22 @@ class ImportViewController: NSViewController {
                         // file exists and is not a directory
                         if (ImageUtility.isImageFile(file)) {
                             if (ImageUtility.isCameraRawFile(file)) {
-                                FileUtility.copy(file, pathUrl: self.outputRawFolderPath, offset: self.offsetTextField.intValue)
+                                FileUtility.copy(file, pathUrl: self.outputRawFolder, offset: self.offset)
                             } else {
-                                FileUtility.copy(file, pathUrl: self.outputJpegFolderPath, offset: self.offsetTextField.intValue)
+                                FileUtility.copy(file, pathUrl: self.outputJpegFolder, offset: self.offset)
                             }
                         }
-                        
                     }
                 } else {
                     // file does not exist
                 }
+                
+                DispatchQueue.main.async {
+                    self.progressIndicator.increment(by: 1.0)
+                }
+            }
+            DispatchQueue.main.async {
+                self.importButton.isEnabled = true
             }
         }
     }
@@ -101,7 +137,8 @@ class ImportViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
+        
+        progressIndicator.isIndeterminate = false
     }
     
 }
