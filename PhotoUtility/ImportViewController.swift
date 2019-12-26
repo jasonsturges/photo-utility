@@ -49,7 +49,7 @@ class ImportViewController: NSViewController {
         openPanel.allowsMultipleSelection = true
         
         openPanel.beginSheetModal(for: self.view.window!) { (response) -> Void in
-            guard response == NSFileHandlingPanelOKButton else {return}
+            guard response.rawValue == NSFileHandlingPanelOKButton else {return}
             self.inputFiles = openPanel.urls
             
             self.inputFolderTextField.stringValue = "\(self.inputFiles.count) files"
@@ -69,7 +69,7 @@ class ImportViewController: NSViewController {
         openPanel.showsHiddenFiles      = false
         
         openPanel.beginSheetModal(for: self.view.window!) { (response) -> Void in
-            guard response == NSFileHandlingPanelOKButton else {return}
+            guard response.rawValue == NSFileHandlingPanelOKButton else {return}
             if let URL = openPanel.url {
                 self.outputJpegFolder = URL
                 self.outputJpegFolderTextField.stringValue = URL.path
@@ -86,7 +86,7 @@ class ImportViewController: NSViewController {
         openPanel.showsHiddenFiles      = false
         
         openPanel.beginSheetModal(for: self.view.window!) { (response) -> Void in
-            guard response == NSFileHandlingPanelOKButton else {return}
+            guard response.rawValue == NSFileHandlingPanelOKButton else {return}
             if let URL = openPanel.url {
                 self.outputRawFolder = URL
                 self.outputRawFolderTextField.stringValue = URL.path
